@@ -4,9 +4,9 @@ import (
 	"context"
 	"strings"
 
-	"github.com/victorbetoni/wynnguardian/ms-items/internal/domain/entity"
-	"github.com/victorbetoni/wynnguardian/ms-items/internal/infra/decoder"
-	"github.com/victorbetoni/wynnguardian/ms-items/internal/infra/decoder/parser"
+	"github.com/wynnguardian/common/entity"
+	"github.com/wynnguardian/ms-items/internal/infra/decoder"
+	"github.com/wynnguardian/ms-items/internal/infra/decoder/parser"
 )
 
 func WeightDecodedItem(ctx context.Context, decoded *decoder.DecodedItem, expected *entity.WynnItem, weightData *entity.ItemCriteria) (float64, error) {

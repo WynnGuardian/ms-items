@@ -4,9 +4,9 @@ import (
 	"context"
 	"errors"
 
-	"github.com/victorbetoni/wynnguardian/ms-items/internal/domain/repository"
-	"github.com/victorbetoni/wynnguardian/ms-items/internal/infra/db"
 	"github.com/wynnguardian/common/uow"
+	"github.com/wynnguardian/ms-items/internal/domain/repository"
+	"github.com/wynnguardian/ms-items/internal/infra/db"
 )
 
 var ErrQueriesNotSet = errors.New("queries not set")

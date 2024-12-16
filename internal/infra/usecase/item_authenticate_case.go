@@ -5,13 +5,13 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/victorbetoni/wynnguardian/ms-items/internal/domain/entity"
-	"github.com/victorbetoni/wynnguardian/ms-items/internal/infra/decoder"
-	"github.com/victorbetoni/wynnguardian/ms-items/internal/infra/decoder/parser"
-	"github.com/victorbetoni/wynnguardian/ms-items/internal/infra/repository"
-	"github.com/victorbetoni/wynnguardian/ms-items/internal/util"
+	"github.com/wynnguardian/common/entity"
 	"github.com/wynnguardian/common/response"
 	"github.com/wynnguardian/common/uow"
+	"github.com/wynnguardian/ms-items/internal/infra/decoder"
+	"github.com/wynnguardian/ms-items/internal/infra/decoder/parser"
+	"github.com/wynnguardian/ms-items/internal/infra/repository"
+	"github.com/wynnguardian/ms-items/internal/util"
 )
 
 type AuthenticateItemCaseInput struct {

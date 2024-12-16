@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/victorbetoni/wynnguardian/ms-items/internal/domain/entity"
-	"github.com/victorbetoni/wynnguardian/ms-items/internal/infra/decoder"
+	"github.com/wynnguardian/common/entity"
+	"github.com/wynnguardian/ms-items/internal/infra/decoder"
 )
 
 func ParseDecodedItem(ctx context.Context, decoded *decoder.DecodedItem, expected *entity.WynnItem) (*entity.ItemInstance, error) {

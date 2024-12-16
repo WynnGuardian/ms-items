@@ -3,7 +3,7 @@ package repository
 import (
 	"context"
 
-	"github.com/victorbetoni/wynnguardian/ms-items/internal/domain/entity"
+	"github.com/wynnguardian/common/entity"
 )
 
 type RepositoryInterface interface {
