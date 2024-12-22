@@ -10,9 +10,9 @@ import (
 
 type PrivateConfig struct {
 	Tokens struct {
-		Self      string `json:"self"`
-		Whitelist string `json:"whitelist"`
-	} `json:"tokenss"`
+		Self      string   `json:"self"`
+		Whitelist []string `json:"whitelist"`
+	} `json:"tokens"`
 	DB struct {
 		Hostname string `json:"hostname"`
 		Port     int    `json:"port"`
@@ -44,9 +44,9 @@ func Load() {
 		panic(err)
 	}
 
-	mustReadAndAssign(pwd, "config/private.json", MainConfig.Private)
-	mustReadAndAssign(pwd, "config/hosts.json", MainConfig.Hosts)
-	mustReadAndAssign(pwd, "config/server.json", MainConfig.Server)
+	mustReadAndAssign(pwd, "config/private.json", &MainConfig.Private)
+	mustReadAndAssign(pwd, "config/hosts.json", &MainConfig.Hosts)
+	mustReadAndAssign(pwd, "config/server.json", &MainConfig.Server)
 }
 
 func mustReadAndAssign(pwd, relativeDir string, target interface{}) {

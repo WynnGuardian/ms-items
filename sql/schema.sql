@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS WG_AuthenticatedItems (
     ItemName VARCHAR(64) NOT NULL,
     OwnerMCUUID VARCHAR(32) NOT NULL,
     OwnerUserId VARCHAR(20) NOT NULL,
-    Position INT NOT NULL,
+    Weight DECIMAL(1,10) NOT NULL,
     TrackingCode VARCHAR(32) NOT NULL,
     OwnerPublic INT NOT NULL,
     Bytes VARCHAR(256) NOT NULL

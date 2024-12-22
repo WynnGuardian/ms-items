@@ -1,0 +1,626 @@
+[
+  {
+    "item": "Epoch",
+    "weights": [
+      {"id": "rawMainAttackDamage","weight": 0.4},
+      {"id": "lifeSteal","weight": 0.15},
+      {"id": "walkSpeed","weight": 0.15},
+      {"id": "manaSteal","weight": 0.1},
+      {"id": "raw4thSpellCost", "weight":0.049},
+      {"id": "raw1stSpellCost","weight":0.1},
+      {"id": "spellDamage","weight":0.05},
+      {"id":"sprint","weight":0.001}
+    ]
+  },
+  {
+    "item":"Hanafubuki",
+    "weights": [
+      {"id": "elementalDamage","weight": 0.50},
+      {"id": "3rdSpellCost","weight": 0.20},
+      {"id": "4thSpellCost","weight": 0.1},
+      {"id": "jumpHeight","weight": 0.15},
+      {"id": "earthDefence", "weight":0.05}
+    ]
+  },
+  {
+    "item":"Hero",
+    "weights": [
+      {"id": "walkSpeed","weight": 0.70},
+      {"id": "healthRegen","weight": 0.20},
+      {"id": "mainAttackDamage","weight": 0.1}
+    ]
+  },
+  {
+    "item":"Collapse",
+    "weights": [
+      {"id": "manaSteal","weight": 0.60},
+      {"id": "mainAttackDamage","weight": 0.10},
+      {"id": "exploding","weight": 0.20},
+      {"id": "elementalDefence", "weight": 0.10}
+    ]
+  },
+  {
+    "item":"Olympic",
+    "weights": [
+      {"id": "jumpHeight","weight": 0.40},
+      {"id": "walkSpeed","weight": 0.20},
+      {"id": "airDamage","weight": 0.20},
+      {"id": "raw1stSpellCost", "weight": 0.08},
+      {"id": "raw2ndSpellCost", "weight": 0.10},
+      {"id": "airDefence", "weight": 0.02}
+    ]
+  },
+  {
+    "item":"Cataclysm",
+    "weights": [
+      {"id": "rawHealth","weight": 0.55},
+      {"id": "raw2ndSpellCost","weight": 0.2},
+      {"id": "thunderDamage","weight": 0.2},
+      {"id": "thorns", "weight": 0.025},
+      {"id": "stealing", "weight": 0.025}
+    ]
+  },
+  {
+    "item":"Absolution",
+    "weights": [
+      {"id": "healingEfficiency","weight": 0.40},
+      {"id": "rawHealth","weight": 0.15},
+      {"id": "manaRegen","weight": 0.15},
+      {"id": "raw1stSpellCost", "weight": 0.1},
+      {"id": "fireDamage", "weight": 0.1},
+      {"id": "earthDefence", "weight": 0.05},
+      {"id": "thunderDefence", "weight": 0.05}
+    ]
+  },
+  {
+    "item":"Thrundacrack",
+    "weights": [
+      {"id": "raw3rdSpellCost","weight": 0.35},
+      {"id": "thunderDamage","weight": 0.35},
+      {"id": "waterDamage","weight": 0.2},
+      {"id": "walkSpeed", "weight": 0.05},
+      {"id": "healthRegen", "weight": 0.05}
+    ]
+  },
+  {
+    "item":"Lament",
+    "weights": [
+      {"id": "waterDamage","weight": 0.40},
+      {"id": "manaSteal","weight": 0.20},
+      {"id": "healingEfficiency","weight": 0.20},
+      {"id": "1stSpellCost", "weight": 0.1},
+      {"id": "lifeSteal", "weight": 0.1}
+    ]
+  },
+  {
+    "item":"Warp",
+    "weights": [
+      {"id": "healthRegenRaw","weight": 0.25},
+      {"id": "manaRegen","weight": 0.2},
+      {"id": "healingEfficiency","weight": 0.15},
+      {"id": "walkSpeed", "weight": 0.15},
+      {"id": "airDamage", "weight": 0.125},
+      {"id": "raw2ndSpellCost", "weight": 0.075},
+      {"id": "healthRegen", "weight": 0.05},
+      {"id": "exploding", "weight": 0},
+      {"id": "reflection", "weight": 0}
+    ]
+  },
+  {
+    "item":"Trance",
+    "weights": [
+      {"id": "manaSteal","weight": 0.44},
+      {"id": "rawAttackSpeed","weight": 0.20},
+      {"id": "walkSpeed","weight": 0.15},
+      {"id": "lifeSteal", "weight": 0.15},
+      {"id": "mainAttackDamage", "weight": 0.05},
+      {"id": "stealing", "weight": 0.01}
+    ]
+  },
+  {
+    "item":"Labyrinth",
+    "weights": [
+      {"id": "earthDamage","weight": 0.30},
+      {"id": "fireDamage","weight": 0.30},
+      {"id": "3rdSpellCost","weight": 0.20},
+      {"id": "slowEnemy", "weight": 0.1},
+      {"id": "manaSteal", "weight": 0.1}
+    ]
+  },
+  {
+    "item":"Crusade Sabatons",
+    "weights": [
+      {"id": "rawHealth","weight": 0.6},
+      {"id": "healthRegen","weight": 0.1},
+      {"id": "walkSpeed","weight": 0.05},
+      {"id": "thorns", "weight": 0.01},
+      {"id": "earthDefence", "weight": 0.07},
+      {"id": "fireDefence", "weight": 0.07}
+    ]
+  },
+  {
+    "item":"Moontower",
+    "weights": [
+      {"id": "walkSpeed","weight": 0.95},
+      {"id": "airDefence","weight": 0.025},
+      {"id": "waterDefence","weight": 0.025}
+    ]
+  },
+  {
+    "item":"Monster",
+    "weights": [
+      {"id": "rawHealth","weight": 0.3},
+      {"id": "manaSteal","weight": 0.25},
+      {"id": "lifeSteal","weight": 0.2},
+      {"id": "fireDamage","weight": 0.2},
+      {"id": "raw1stSpellCost","weight": 0.2},
+      {"id": "mainAttackDamage","weight": 0.05}
+    ]
+  },
+  {
+    "item":"Resurgence",
+    "weights": [
+      {"id": "manaRegen","weight": 0.4},
+      {"id": "healthRegen","weight": 0.2},
+      {"id": "healthRegenRaw","weight": 0.2},
+      {"id": "walkSpeed","weight": 0.15},
+      {"id": "mainAttackDamage","weight": 0.05}
+    ]
+  },
+  {
+    "item":"Idol",
+    "weights": [
+      {"id": "raw2ndSpellCost","weight": 0.5},
+      {"id": "rawSpellDamage","weight": 0.2},
+      {"id": "manaRegen","weight": 0.15},
+      {"id": "reflection","weight": 0.1},
+      {"id": "waterDefence","weight": 0.05}
+    ]
+  },
+  {
+    "item":"Stratiformis",
+    "weights": [
+      {"id": "walkSpeed","weight": 0.6},
+      {"id": "rawHealth","weight": 0.25},
+      {"id": "spellDamage","weight": 0.1},
+      {"id": "reflection","weight": 0.025},
+      {"id": "mainAttackDamage","weight": 0.025}
+    ]
+  },
+  {
+    "item":"Divzer",
+    "weights": [
+      {"id": "manaSteal","weight": 0.55},
+      {"id": "lifeSteal","weight": 0.2},
+      {"id": "rawSpellDamage","weight": 0.2},
+      {"id": "fireDamage", "weight": 0},
+      {"id": "waterDamage","weight": 0},
+      {"id": "rawMainAttackDamage","weight": 0.05}
+    ]
+  },
+  {
+    "item":"Warchief",
+    "weights": [
+      {"id": "mainAttackDamage","weight": 0.3},
+      {"id": "thunderDamage","weight": 0.2},
+      {"id": "earthDamage","weight": 0.2},
+      {"id": "walkSpeed", "weight": 0.1},
+      {"id": "exploding", "weight": 0.1},
+      {"id": "rawMainAttackDamage","weight": 0.1}
+    ]
+  },
+  {
+    "item":"Guardian",
+    "weights": [
+      {"id": "rawHealth","weight": 0.62},
+      {"id": "healthRegenRaw","weight": 0.25},
+      {"id": "manaRegen","weight": 0.05},
+      {"id": "thorns", "weight": 0.05},
+      {"id": "waterDefence", "weight": 0.01},
+      {"id": "earthDefence", "weight": 0.01},
+      {"id": "fireDefence","weight": 0.01}
+    ]
+  },
+  {
+    "item":"Weathered",
+    "weights": [
+      {"id": "airDamage","weight": 0.4},
+      {"id": "manaSteal","weight": 0.25},
+      {"id": "walkSpeed","weight": 0.3},
+      {"id": "reflection", "weight": 0.05},
+      {"id": "exploding", "weight": 0.0}
+    ]
+  },
+  {
+    "item":"Stardew",
+    "weights": [
+      {"id": "rawSpellDamage","weight": 0.3},
+      {"id": "manaRegen","weight": 0.2},
+      {"id": "waterDamage","weight": 0.15},
+      {"id": "thunderDamage", "weight": 0.15},
+      {"id": "manaSteal", "weight": 0.2},
+      {"id": "reflection", "weight": 0.0}
+    ]
+  },
+  {
+    "item":"Revenant",
+    "weights": [
+      {"id": "rawMainAttackDamage","weight": 0.1},
+      {"id": "walkSpeed","weight": 0.15},
+      {"id": "earthDamage","weight": 0.2},
+      {"id": "airDamage", "weight": 0.2},
+      {"id": "rawHealth", "weight": 0.1},
+      {"id": "mainAttackDamage", "weight": 0.05},
+      {"id": "4thSpellCost", "weight": 0.05},
+      {"id": "manaSteal", "weight": 0.2},
+      {"id": "reflection", "weight": 0.05}
+    ]
+  },
+  {
+    "item":"Grandmother",
+    "weights": [
+      {"id": "healthRegenRaw","weight": 0.35},
+      {"id": "spellDamage","weight": 0.25},
+      {"id": "walkSpeed","weight": 0.05},
+      {"id": "healthRegen", "weight": 0.05},
+      {"id": "mainAttackDamage", "weight": 0.1},
+      {"id": "lootBonus", "weight": 0.05},
+      {"id": "xpBonus", "weight": 0.05}
+    ]
+  },
+  {
+    "item":"Bloodbath",
+    "weights": [
+      {"id": "raw1stSpellCost","weight": 0.4},
+      {"id": "walkSpeed","weight": 0.2},
+      {"id": "rawHealth","weight": 0.2},
+      {"id": "lifeSteal", "weight": 0.1},
+      {"id": "manaRegen", "weight": 0.05}
+    ]
+  },
+  {
+    "item":"Fatal",
+    "weights": [
+      {"id": "spellDamage","weight": 0.5},
+      {"id": "1stSpellCost","weight": 0.1},
+      {"id": "2ndSpellCost","weight": 0.1},
+      {"id": "walkSpeed", "weight": 0.15},
+      {"id": "manaSteal", "weight": 0.15}
+    ]
+  },
+  {
+    "item":"Convergence",
+    "weights": [
+      {"id": "healthRegen","weight": 0.08},
+      {"id": "sprintRegen","weight": 0.03},
+      {"id": "airDefence","weight": 0.02},
+      {"id": "thunderDamage", "weight": 0.35},
+      {"id": "earthDamage", "weight": 0.35},
+      {"id": "3rdSpellCost", "weight": 0.12}
+    ]
+  },
+  {
+    "item":"Immolation",
+    "weights": [
+      {"id": "healthRegen","weight": 0.025},
+      {"id": "healingEfficiency","weight": 0.025},
+      {"id": "fireDamage","weight": 0.325},
+      {"id": "airDamage", "weight": 0.325},
+      {"id": "3rdSpellCost", "weight": 0.3}
+    ]
+  },
+  {
+    "item":"Nirvana",
+    "weights": [
+      {"id": "spellDamage","weight": 0.4},
+      {"id": "manaRegen","weight": 0.3},
+      {"id": "rawHealth","weight": 0.2},
+      {"id": "manaSteal", "weight": 0.05},
+      {"id": "reflection", "weight": 0.05},
+      {"id": "mainAttackDamage", "weight": 0}
+    ]
+  },
+  {
+    "item":"Freedom",
+    "weights": [
+      {"id": "manaRegen","weight": 0.4},
+      {"id": "rawHealth","weight": 0.3},
+      {"id": "walkSpeed","weight": 0.1},
+      {"id": "rawSpellDamage", "weight": 0.2},
+      {"id": "rawMainAttackDamage", "weight": 0.0}
+    ]
+  },
+  {
+    "item":"Resonance",
+    "weights": [
+      {"id": "healthRegen","weight": 0.05},
+      {"id": "manaRegen","weight": 0.2},
+      {"id": "sprint","weight": 0.05},
+      {"id": "airDefence", "weight": 0},
+      {"id": "elementalSpellDamage", "weight": 0.4},
+      {"id": "4thSpellCost", "weight": 0.3}
+    ]
+  },
+  {
+    "item":"Hadal",
+    "weights": [
+      {"id": "manaRegen","weight": 0.3},
+      {"id": "spellDamage","weight": 0.4},
+      {"id": "3rdSpellCost","weight": 0.2},
+      {"id": "4thSpellCost", "weight": 0.1}
+    ]
+  },
+  {
+    "item":"Aftershock",
+    "weights": [
+      {"id": "rawHealth","weight": 0.4},
+      {"id": "earthDamage","weight": 0.3},
+      {"id": "earthDefence","weight": 0.05},
+      {"id": "spellDamage", "weight": 0.05},
+      {"id": "4thSpellCost", "weight": 0.2}
+    ]
+  },
+  {
+    "item":"Slayer",
+    "weights": [
+      {"id": "healthRegenRaw","weight": 0.05},
+      {"id": "walkSpeed","weight": 0.3},
+      {"id": "stealing","weight": 0.05},
+      {"id": "3rdSpellCost", "weight": 0.4},
+      {"id": "rawMainAttackDamage", "weight": 0.2}
+    ]
+  },
+  {
+    "item":"Ignis",
+    "weights": [
+      {"id": "healthRegenRaw","weight": 0.4},
+      {"id": "healthRegen","weight": 0.2},
+      {"id": "rawHealth","weight": 0.2},
+      {"id": "4thSpellCost", "weight": 0.1},
+      {"id": "fireDamage", "weight": 0.1}
+    ]
+  },
+  {
+    "item":"Toxoplasmosis",
+    "weights": [
+      {"id": "poison","weight": 0.5},
+      {"id": "lootBonus","weight": 0.15},
+      {"id": "walkSpeed","weight": 0.15},
+      {"id": "manaSteal", "weight": 0.1},
+      {"id": "lifeSteal", "weight": 0.1}
+    ]
+  },
+  {
+    "item":"Spring",
+    "weights": [
+      {"id": "manaRegen","weight": 0.35},
+      {"id": "weakenEnemy","weight": 0.15},
+      {"id": "slowEnemy","weight": 0.2},
+      {"id": "waterDamage", "weight": 0.3},
+      {"id": "thunderDamage", "weight": 0}
+    ]
+  },
+  {
+    "item":"Boreal",
+    "weights": [
+      {"id": "healthRegen","weight": 0.4},
+      {"id": "healthRegenRaw","weight": 0.2},
+      {"id": "manaRegen","weight": 0.2},
+      {"id": "walkSpeed", "weight": 0.15},
+      {"id": "reflection", "weight": 0.01},
+      {"id": "airDefence", "weight": 0.01},
+      {"id": "fireDefence", "weight": 0.01},
+      {"id": "thunderDamage", "weight": 0.01},
+      {"id": "earthDamage", "weight": 0.01}
+    ]
+  },
+  {
+    "item":"Fantasia",
+    "weights": [
+      {"id": "manaRegen","weight": 0.2},
+      {"id": "manaSteal","weight": 0.15},
+      {"id": "spellDamage","weight": 0.25},
+      {"id": "1stSpellCost", "weight": 0.05},
+      {"id": "2ndSpellCost", "weight": 0.05},
+      {"id": "3rdSpellCost", "weight": 0.25},
+      {"id": "4thSpellCost", "weight": 0.05}
+    ]
+  },
+  {
+    "item":"Pure",
+    "weights": [
+      {"id": "reflection","weight": 0.1},
+      {"id": "manaSteal","weight": 0.15},
+      {"id": "xpBonus","weight": 0.2},
+      {"id": "spellDamage", "weight": 0.55},
+      {"id": "mainAttackDamage", "weight": 0}
+    ]
+  },
+  {
+    "item":"Grimtrap",
+    "weights": [
+      {"id": "lifeSteal","weight": 0.1},
+      {"id": "manaSteal","weight": 0.1},
+      {"id": "thorns","weight": 0.05},
+      {"id": "poison", "weight": 0.1},
+      {"id": "raw4thSpellCost", "weight": 0.5},
+      {"id": "raw2ndSpellCost", "weight": 0.15}
+    ]
+  },
+  {
+    "item":"Alkatraz",
+    "weights": [
+      {"id": "earthDamage","weight": 0.45},
+      {"id": "mainAttackDamage","weight": 0.45},
+      {"id": "exploding","weight": 0.1}
+    ]
+  },
+  {
+    "item":"Quetzalcoatl",
+    "weights": [
+      {"id": "healingEfficiency","weight": 0.1},
+      {"id": "lifeSteal","weight": 0.2},
+      {"id": "walkSpeed","weight": 0.2},
+      {"id": "jumpHeight","weight": 0.05},
+      {"id": "rawSpellDamage","weight": 0.4},
+      {"id": "rawMainAttackDamage","weight": 0.05}
+    ]
+  },
+  {
+    "item":"Singularity",
+    "weights": [
+      {"id": "healthRegenRaw","weight": 0.1},
+      {"id": "walkSpeed","weight": 0.2},
+      {"id": "spellDamage","weight": 0.25},
+      {"id": "rawSpellDamage","weight": 0.3},
+      {"id": "mainAttackDamage","weight": 0.05},
+      {"id": "rawMainAttackDamage","weight": 0.1}
+    ]
+  },
+  {
+    "item":"Sunstar",
+    "weights": [
+      {"id": "healingEfficiency","weight": 0.05},
+      {"id": "lifeSteal","weight": 0.15},
+      {"id": "reflection","weight": 0.03},
+      {"id": "thorns","weight": 0.02},
+      {"id": "thunderDamage","weight": 0.3},
+      {"id": "rawMainAttackDamage","weight": 0.45}
+    ]
+  },
+  {
+    "item":"Discoverer",
+    "weights": [
+      {"id": "lootBonus","weight": 0.95},
+      {"id": "xpBonus","weight": 0.05}
+    ]
+  },
+  {
+    "item":"Oblivion",
+    "weights": [
+      {"id": "manaRegen","weight": 0.3},
+      {"id": "manaSteal","weight": 0.2},
+      {"id": "exploding","weight": 0.05},
+      {"id": "rawSpellDamage","weight": 0.2},
+      {"id": "raw2ndSpellCost","weight": 0.25}
+    ]
+  },
+  {
+    "item":"Az",
+    "weights": [
+      {"id": "xpBonus","weight": 0.1},
+      {"id": "fireDamage","weight": 0.2},
+      {"id": "waterDamage","weight": 0.2},
+      {"id": "1stSpellCost","weight": 0.5}
+    ]
+  },
+  {
+    "item":"Archangel",
+    "weights": [
+      {"id": "rawHealth","weight": 0.15},
+      {"id": "healthRegen","weight": 0.15},
+      {"id": "healthRegenRaw","weight": 0.4},
+      {"id": "walkSpeed","weight": 0.3}
+    ]
+  },
+  {
+    "item":"Gaia",
+    "weights": [
+      {"id": "thorns","weight": 0.05},
+      {"id": "poison","weight": 0.2},
+      {"id": "mainAttackDamage","weight": 0.2},
+      {"id": "rawMainAttackDamage","weight": 0.4},
+      {"id": "raw4thSpellCost","weight": 0.15}
+    ]
+  },
+  {
+    "item":"Nullification",
+    "weights": [
+      {"id": "lifeSteal","weight": 0.15},
+      {"id": "manaSteal","weight": 0.15},
+      {"id": "reflection","weight": 0.05},
+      {"id": "poison","weight": 0.05},
+      {"id": "elementalDefence","weight": 0.6}
+    ]
+  },
+  {
+    "item":"Inferno",
+    "weights": [
+      {"id": "rawHealth","weight": 0.1},
+      {"id": "healthRegen","weight": 0.03},
+      {"id": "manaRegen","weight": 0.05},
+      {"id": "walkSpeed","weight": 0.2},
+      {"id": "waterDefence","weight": 0.02},
+      {"id": "fireDamage","weight": 0.15},
+      {"id": "mainAttackDamage","weight": 0.15},
+      {"id": "rawMainAttackDamage","weight": 0.25},
+      {"id": "raw1stSpellCost","weight": 0.05}
+    ]
+  },
+  {
+    "item":"Apocalypse",
+    "weights": [
+      {"id": "healthRegen","weight": 0.15},
+      {"id": "lifeSteal","weight": 0.7},
+      {"id": "exploding","weight": 0.05},
+      {"id": "fireDefence","weight": 0.05},
+      {"id": "waterDefence","weight": 0.03},
+      {"id": "waterDamage","weight": 0},
+      {"id": "3rdSpellCost","weight": 0.02}
+    ]
+  },
+  {
+    "item":"Dawnbreak",
+    "weights": [
+      {"id": "manaSteal","weight": 0.15},
+      {"id": "lifeSteal","weight": 0.2},
+      {"id": "rawAttackSpeed","weight": 0},
+      {"id": "exploding","weight": 0.05},
+      {"id": "fireDamage","weight": 0.25},
+      {"id": "thunderDamage","weight": 0.25},
+      {"id": "rawMainAttackDamage","weight": 0.1}
+    ]
+  },
+  {
+    "item":"Galleon",
+    "weights": [
+      {"id": "manaSteal","weight": 0.15},
+      {"id": "poison","weight": 0.1},
+      {"id": "stealing","weight": 1},
+      {"id": "lootBonus","weight": 0.05},
+      {"id": "waterDamage","weight": 0.25},
+      {"id": "earthDamage","weight": 0.25},
+      {"id": "mainAttackDamage","weight": 0.1}
+    ]
+  },
+  {
+    "item":"Ringlets",
+    "weights": [
+      {"id": "raw4thSpellCost","weight": 0.55},
+      {"id": "manaRegen","weight": 0.4},
+      {"id": "xpBonus","weight": 0.025},
+      {"id": "reflection","weight": 0.025}
+    ]
+  },
+  {
+    "item":"The Ephemeral",
+    "weights": [
+      {"id": "manaRegen","weight": 0.4},
+      {"id": "spellDamage","weight": 0.25},
+      {"id": "airDamage","weight": 0.25},
+      {"id": "thunderDefence","weight": 0.08},
+      {"id": "mainAttackDamage","weight": 0.02}
+    ]
+  },
+  {
+    "item":"Keratoconus",
+    "weights": [
+      {"id": "manaRegen","weight": 0.25},
+      {"id": "airDamage","weight": 0.25},
+      {"id": "healthRegen","weight": 0.025},
+      {"id": "raw4thSpellCost","weight": 0.35},
+      {"id": "waterDefence","weight": 0.025},
+      {"id": "thunderDamage","weight": 0.1}
+    ]
+  }
+]

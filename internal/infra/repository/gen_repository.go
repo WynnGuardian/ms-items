@@ -15,6 +15,7 @@ type IncomingItem struct {
 	Rarity            string `json:"rarity"`
 	InternalName      string `json:"internalName"`
 	LevelReq          int    `json:"levelReq"`
+	Sprite            string `json:"sprite"`
 	StrReq            int    `json:"strReq"`
 	AgiReq            int    `json:"agiReq"`
 	IntReq            int    `json:"intReq"`
@@ -149,7 +150,7 @@ func (g *GenRepository) GenItemDB(ctx context.Context) {
 
 		err := g.Queries.CreateWynnItem(ctx, db.CreateWynnItemParams{
 			Name:            item.InternalName,
-			Sprite:          "",
+			Sprite:          item.Sprite,
 			Reqlevel:        int32(item.LevelReq),
 			Reqstrenght:     int32(item.StrReq),
 			Reqagility:      int32(item.AgiReq),

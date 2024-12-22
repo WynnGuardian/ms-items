@@ -14,7 +14,7 @@ type WgAuthenticateditem struct {
 	Itemname     string    `json:"itemname"`
 	Ownermcuuid  string    `json:"ownermcuuid"`
 	Owneruserid  string    `json:"owneruserid"`
-	Position     int32     `json:"position"`
+	Weight       float64   `json:"weight"`
 	Trackingcode string    `json:"trackingcode"`
 	Ownerpublic  int32     `json:"ownerpublic"`
 	Bytes        string    `json:"bytes"`

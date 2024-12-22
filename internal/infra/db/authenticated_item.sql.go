@@ -11,7 +11,7 @@ import (
 )
 
 const createAuthenticatedItem = `-- name: CreateAuthenticatedItem :exec
-INSERT INTO WG_AuthenticatedItems (Id, LastRanked, ItemName, OwnerMCUUID, OwnerUserId, Position, TrackingCode, OwnerPublic, Bytes) VALUES (?,?,?,?,?,?,?,?,?)
+INSERT INTO WG_AuthenticatedItems (Id, LastRanked, ItemName, OwnerMCUUID, OwnerUserId, Weight, TrackingCode, OwnerPublic, Bytes) VALUES (?,?,?,?,?,?,?,?,?)
 `
 
 type CreateAuthenticatedItemParams struct {
@@ -20,7 +20,7 @@ type CreateAuthenticatedItemParams struct {
 	Itemname     string    `json:"itemname"`
 	Ownermcuuid  string    `json:"ownermcuuid"`
 	Owneruserid  string    `json:"owneruserid"`
-	Position     int32     `json:"position"`
+	Weight       float64   `json:"weight"`
 	Trackingcode string    `json:"trackingcode"`
 	Ownerpublic  int32     `json:"ownerpublic"`
 	Bytes        string    `json:"bytes"`
@@ -33,7 +33,7 @@ func (q *Queries) CreateAuthenticatedItem(ctx context.Context, arg CreateAuthent
 		arg.Itemname,
 		arg.Ownermcuuid,
 		arg.Owneruserid,
-		arg.Position,
+		arg.Weight,
 		arg.Trackingcode,
 		arg.Ownerpublic,
 		arg.Bytes,
@@ -69,7 +69,7 @@ func (q *Queries) FindAllAuthenticatedItemNames(ctx context.Context) ([]string, 
 }
 
 const findAuthenticatedItem = `-- name: FindAuthenticatedItem :one
-SELECT id, lastranked, itemname, ownermcuuid, owneruserid, position, trackingcode, ownerpublic, bytes FROM WG_AuthenticatedItems WHERE Id = ? OR TrackingCode = ?
+SELECT id, lastranked, itemname, ownermcuuid, owneruserid, weight, trackingcode, ownerpublic, bytes FROM WG_AuthenticatedItems WHERE Id = ? OR TrackingCode = ?
 `
 
 type FindAuthenticatedItemParams struct {
@@ -85,7 +85,7 @@ func (q *Queries) FindAuthenticatedItem(ctx context.Context, arg FindAuthenticat
 		&i.Itemname,
 		&i.Ownermcuuid,
 		&i.Owneruserid,
-		&i.Position,
+		&i.Weight,
 		&i.Trackingcode,
 		&i.Ownerpublic,
 		&i.Bytes,
@@ -125,7 +125,7 @@ func (q *Queries) FindAuthenticatedItemStats(ctx context.Context, arg FindAuthen
 }
 
 const findWynnItemAuthenticatedItems = `-- name: FindWynnItemAuthenticatedItems :many
-SELECT id, lastranked, itemname, ownermcuuid, owneruserid, position, trackingcode, ownerpublic, bytes FROM WG_AuthenticatedItems WHERE ItemName = ?
+SELECT id, lastranked, itemname, ownermcuuid, owneruserid, weight, trackingcode, ownerpublic, bytes FROM WG_AuthenticatedItems WHERE ItemName = ?
 `
 
 func (q *Queries) FindWynnItemAuthenticatedItems(ctx context.Context, itemname string) ([]WgAuthenticateditem, error) {
@@ -143,7 +143,50 @@ func (q *Queries) FindWynnItemAuthenticatedItems(ctx context.Context, itemname s
 			&i.Itemname,
 			&i.Ownermcuuid,
 			&i.Owneruserid,
-			&i.Position,
+			&i.Weight,
+			&i.Trackingcode,
+			&i.Ownerpublic,
+			&i.Bytes,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const rankAuthenticatedItems = `-- name: RankAuthenticatedItems :many
+SELECT id, lastranked, itemname, ownermcuuid, owneruserid, weight, trackingcode, ownerpublic, bytes FROM WG_AuthenticatedItems WHERE ItemName = ? ORDER BY Weight LIMIT ? OFFSET ?
+`
+
+type RankAuthenticatedItemsParams struct {
+	Itemname string `json:"itemname"`
+	Limit    int32  `json:"limit"`
+	Offset   int32  `json:"offset"`
+}
+
+func (q *Queries) RankAuthenticatedItems(ctx context.Context, arg RankAuthenticatedItemsParams) ([]WgAuthenticateditem, error) {
+	rows, err := q.db.QueryContext(ctx, rankAuthenticatedItems, arg.Itemname, arg.Limit, arg.Offset)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []WgAuthenticateditem
+	for rows.Next() {
+		var i WgAuthenticateditem
+		if err := rows.Scan(
+			&i.ID,
+			&i.Lastranked,
+			&i.Itemname,
+			&i.Ownermcuuid,
+			&i.Owneruserid,
+			&i.Weight,
 			&i.Trackingcode,
 			&i.Ownerpublic,
 			&i.Bytes,
@@ -162,14 +205,14 @@ func (q *Queries) FindWynnItemAuthenticatedItems(ctx context.Context, itemname s
 }
 
 const updateAuthenticatedItem = `-- name: UpdateAuthenticatedItem :exec
-UPDATE WG_AuthenticatedItems SET LastRanked = ?, OwnerMCUUID = ?, OwnerUserId = ?, Position = ?, OwnerPublic = ?, Bytes = ? WHERE Id = ? OR TrackingCode = ?
+UPDATE WG_AuthenticatedItems SET LastRanked = ?, OwnerMCUUID = ?, OwnerUserId = ?,  Weight = ?, OwnerPublic = ?, Bytes = ? WHERE Id = ? OR TrackingCode = ?
 `
 
 type UpdateAuthenticatedItemParams struct {
 	Lastranked   time.Time `json:"lastranked"`
 	Ownermcuuid  string    `json:"ownermcuuid"`
 	Owneruserid  string    `json:"owneruserid"`
-	Position     int32     `json:"position"`
+	Weight       float64   `json:"weight"`
 	Ownerpublic  int32     `json:"ownerpublic"`
 	Bytes        string    `json:"bytes"`
 	ID           string    `json:"id"`
@@ -181,7 +224,7 @@ func (q *Queries) UpdateAuthenticatedItem(ctx context.Context, arg UpdateAuthent
 		arg.Lastranked,
 		arg.Ownermcuuid,
 		arg.Owneruserid,
-		arg.Position,
+		arg.Weight,
 		arg.Ownerpublic,
 		arg.Bytes,
 		arg.ID,

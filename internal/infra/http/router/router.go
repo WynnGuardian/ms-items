@@ -1,9 +1,13 @@
 package router
 
 import (
+	"fmt"
+
 	"github.com/gin-gonic/gin"
 	"github.com/wynnguardian/common/handlerfunc"
 	middleware "github.com/wynnguardian/common/middlewares"
+	"github.com/wynnguardian/common/response"
+	"github.com/wynnguardian/ms-items/internal/domain/config"
 	"github.com/wynnguardian/ms-items/internal/infra/http/handlers"
 )
 
@@ -18,6 +22,8 @@ var (
 	entries = []RouterEntry{
 		{Path: "/itemWeigh", MustBeMod: false, Method: "POST", Handler: handlers.WeightItem},
 		{Path: "/itemAuth", MustBeMod: true, Method: "POST", Handler: handlers.AuthItem},
+		{Path: "/rankUpdate", MustBeMod: true, Method: "POST", Handler: handlers.UpdateRank},
+		{Path: "/getRank", MustBeMod: true, Method: "POST", Handler: handlers.GetRank},
 	}
 )
 
@@ -44,11 +50,24 @@ func Build() *gin.Engine {
 		switch entry.Method {
 		case "POST":
 			if entry.MustBeMod {
-				post(engine, entry.Path, middleware.CheckOrigin(middleware.Authorize(entry.Handler)))
+				post(engine, entry.Path, Authorize(entry.Handler))
 			} else {
-				post(engine, entry.Path, middleware.CheckOrigin(entry.Handler))
+				post(engine, entry.Path, Authorize(entry.Handler))
 			}
 		}
 	}
 	return engine
+}
+
+func Authorize(hf handlerfunc.HandlerFunc) handlerfunc.HandlerFunc {
+	return func(ctx *gin.Context) response.WGResponse {
+		wl := config.MainConfig.Private.Tokens.Whitelist
+		fmt.Println(ctx.GetHeader("Authorization"))
+		for _, w := range wl {
+			if w == ctx.GetHeader("Authorization") {
+				return hf(ctx)
+			}
+		}
+		return response.ErrUnauthorized
+	}
 }

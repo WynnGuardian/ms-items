@@ -69,5 +69,6 @@ func FromUtf16String(s string) *EncodedByteBuffer {
 		}
 	}
 
+	fmt.Println(encodedBuffer.Bytes)
 	return encodedBuffer
 }

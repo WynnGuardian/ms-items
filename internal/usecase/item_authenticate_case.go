@@ -81,7 +81,7 @@ func (u *AuthenticateItemCase) Execute(ctx context.Context, in AuthenticateItemC
 			OwnerMC:      in.MCOwnerUID,
 			OwnerDC:      in.DCOwnerUID,
 			Stats:        item.Stats,
-			Position:     999,
+			Weight:       weight * 100,
 			LastRanked:   time.Now(),
 			PublicOwner:  in.Public,
 			TrackingCode: tCode,

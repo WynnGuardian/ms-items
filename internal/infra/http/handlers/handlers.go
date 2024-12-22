@@ -30,3 +30,19 @@ func FindCriteria(ctx *gin.Context) response.WGResponse {
 	}
 	return usecase.NewFindCriteriaCase(uow.Current()).Execute(ctx, input)
 }
+
+func UpdateRank(ctx *gin.Context) response.WGResponse {
+	input := usecase.RankUpdateCaseInput{}
+	if err := ctx.BindJSON(&input); err != nil {
+		return response.ErrBadRequest
+	}
+	return usecase.NewRankUpdateCase(uow.Current()).Execute(ctx, input)
+}
+
+func GetRank(ctx *gin.Context) response.WGResponse {
+	input := usecase.GetRankCaseInput{}
+	if err := ctx.BindJSON(&input); err != nil {
+		return response.ErrBadRequest
+	}
+	return usecase.NewGetRankCase(uow.Current()).Execute(ctx, input)
+}
