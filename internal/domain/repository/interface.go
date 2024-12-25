@@ -10,7 +10,6 @@ type RepositoryInterface interface {
 }
 
 type AuthenticatedItemRepositoryInterface interface {
-	FindFirst(ctx context.Context, id string) (*entity.AuthenticatedItem, error)
 	FindAllWithItem(ctx context.Context, name string) ([]*entity.AuthenticatedItem, error)
 	Update(ctx context.Context, item *entity.AuthenticatedItem) error
 	Create(ctx context.Context, item *entity.AuthenticatedItem) error
@@ -24,6 +23,9 @@ type WynnItemRepositoryInterface interface {
 type CriteriaRepositoryInterface interface {
 	Find(ctx context.Context, name string) (*entity.ItemCriteria, error)
 	Update(ctx context.Context, crit *entity.ItemCriteria) error
+	Create(ctx context.Context, itemName, statId string, value float64) error
+	Delete(ctx context.Context, itemName, statId string) error
+	UpdateOne(ctx context.Context, itemName, statId string, value float64) error
 }
 
 type GenRepositoryInterface interface {

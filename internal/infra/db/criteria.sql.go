@@ -33,8 +33,22 @@ func (q *Queries) CreateCriteria(ctx context.Context, arg CreateCriteriaParams) 
 	return err
 }
 
+const deleteCriteria = `-- name: DeleteCriteria :exec
+DELETE FROM WG_Criteria WHERE ItemName = ? AND StatId = ?
+`
+
+type DeleteCriteriaParams struct {
+	Itemname string `json:"itemname"`
+	Statid   string `json:"statid"`
+}
+
+func (q *Queries) DeleteCriteria(ctx context.Context, arg DeleteCriteriaParams) error {
+	_, err := q.db.ExecContext(ctx, deleteCriteria, arg.Itemname, arg.Statid)
+	return err
+}
+
 const findItemCriterias = `-- name: FindItemCriterias :many
-SELECT itemname, statid, value FROM WG_Criteria WHERE ItemName = ?
+SELECT itemname, statid, value FROM WG_Criteria WHERE ItemName = ? ORDER BY Value DESC
 `
 
 func (q *Queries) FindItemCriterias(ctx context.Context, itemname string) ([]WgCriterium, error) {

@@ -46,3 +46,27 @@ func GetRank(ctx *gin.Context) response.WGResponse {
 	}
 	return usecase.NewGetRankCase(uow.Current()).Execute(ctx, input)
 }
+
+func CreateCriteria(ctx *gin.Context) response.WGResponse {
+	input := usecase.CreateCriteriaCaseInput{}
+	if err := ctx.BindJSON(&input); err != nil {
+		return response.ErrBadRequest
+	}
+	return usecase.NewCreateCriteriaCase(uow.Current()).Execute(ctx, input)
+}
+
+func DeleteCriteria(ctx *gin.Context) response.WGResponse {
+	input := usecase.DeleteCriteriaCaseInput{}
+	if err := ctx.BindJSON(&input); err != nil {
+		return response.ErrBadRequest
+	}
+	return usecase.NewDeleteCriteriaCase(uow.Current()).Execute(ctx, input)
+}
+
+func UpdateCriteria(ctx *gin.Context) response.WGResponse {
+	input := usecase.CriteriaUpdateCaseInput{}
+	if err := ctx.BindJSON(&input); err != nil {
+		return response.ErrBadRequest
+	}
+	return usecase.NewCriteriaUpdateCase(uow.Current()).Execute(ctx, input)
+}

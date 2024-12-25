@@ -51,3 +51,26 @@ func (c *CriteriaRepository) Update(ctx context.Context, crit *entity.ItemCriter
 	}
 	return nil
 }
+
+func (c *CriteriaRepository) Create(ctx context.Context, itemName, statId string, value float64) error {
+	return c.Queries.CreateCriteria(ctx, db.CreateCriteriaParams{
+		Itemname: itemName,
+		Statid:   statId,
+		Value:    value,
+	})
+}
+
+func (c *CriteriaRepository) Delete(ctx context.Context, itemName, statId string) error {
+	return c.Queries.DeleteCriteria(ctx, db.DeleteCriteriaParams{
+		Itemname: itemName,
+		Statid:   statId,
+	})
+}
+
+func (c *CriteriaRepository) UpdateOne(ctx context.Context, itemName, statId string, value float64) error {
+	return c.Queries.UpdateCriteria(ctx, db.UpdateCriteriaParams{
+		Value:    value,
+		Itemname: itemName,
+		Statid:   statId,
+	})
+}

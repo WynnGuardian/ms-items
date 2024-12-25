@@ -27,7 +27,7 @@ func ParseDecodedItem(ctx context.Context, decoded *decoder.DecodedItem, expecte
 	canonicalIds := make(map[string]int, 0)
 	for id, val := range decoded.Identifications {
 		fmt.Printf("ID %d\n", id)
-		name, ok := IdTable[int(id)]
+		name, ok := IdToName[int(id)]
 		if !ok {
 			return nil, fmt.Errorf("unknow identification numeric id: \"%d\"", id)
 		}

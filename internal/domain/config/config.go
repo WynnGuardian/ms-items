@@ -10,8 +10,9 @@ import (
 
 type PrivateConfig struct {
 	Tokens struct {
-		Self      string   `json:"self"`
-		Whitelist []string `json:"whitelist"`
+		Self        string   `json:"self"`
+		Whitelist   []string `json:"whitelist"`
+		RLWhitelist []string `json:"rl_whitelist"`
 	} `json:"tokens"`
 	DB struct {
 		Hostname string `json:"hostname"`

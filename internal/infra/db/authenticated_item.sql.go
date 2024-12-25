@@ -162,7 +162,7 @@ func (q *Queries) FindWynnItemAuthenticatedItems(ctx context.Context, itemname s
 }
 
 const rankAuthenticatedItems = `-- name: RankAuthenticatedItems :many
-SELECT id, lastranked, itemname, ownermcuuid, owneruserid, weight, trackingcode, ownerpublic, bytes FROM WG_AuthenticatedItems WHERE ItemName = ? ORDER BY Weight LIMIT ? OFFSET ?
+SELECT id, lastranked, itemname, ownermcuuid, owneruserid, weight, trackingcode, ownerpublic, bytes FROM WG_AuthenticatedItems WHERE ItemName = ? ORDER BY Weight DESC LIMIT ? OFFSET ?
 `
 
 type RankAuthenticatedItemsParams struct {

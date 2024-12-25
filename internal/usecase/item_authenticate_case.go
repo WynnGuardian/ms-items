@@ -2,12 +2,14 @@ package usecase
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 	"time"
 
 	"github.com/wynnguardian/common/entity"
 	"github.com/wynnguardian/common/response"
 	"github.com/wynnguardian/common/uow"
+	"github.com/wynnguardian/common/utils"
 	"github.com/wynnguardian/ms-items/internal/infra/decoder"
 	"github.com/wynnguardian/ms-items/internal/infra/decoder/parser"
 	"github.com/wynnguardian/ms-items/internal/infra/repository"
@@ -46,7 +48,7 @@ func (u *AuthenticateItemCase) Execute(ctx context.Context, in AuthenticateItemC
 		criteriaRepo := repository.GetItemCriteriaRepository(ctx, uow)
 		authRepo := repository.GetAuthenticatedItemRepository(ctx, uow)
 
-		tCode := util.GenNanoId(24)
+		tCode := utils.GenAuthId()
 		id := util.GenNanoId(24)
 
 		decoded, err := decoder.NewItemDecoder(in.ItemUTF16).Decode()
@@ -54,15 +56,20 @@ func (u *AuthenticateItemCase) Execute(ctx context.Context, in AuthenticateItemC
 			return response.ErrInvalidItem
 		}
 
+		fmt.Println(1)
+
 		expected, err := wItemRepo.Find(ctx, decoded.Name)
 		if err != nil {
 			return response.ErrWynnItemNotFound
 		}
 
+		fmt.Println(2)
+
 		criteria, err := criteriaRepo.Find(ctx, decoded.Name)
 		if err != nil {
 			return response.ErrCriteriaNotFound
 		}
+		fmt.Println(3)
 
 		item, err := parser.ParseDecodedItem(ctx, decoded, expected)
 		if err != nil {

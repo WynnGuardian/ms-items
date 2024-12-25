@@ -21,9 +21,14 @@ type RouterEntry struct {
 var (
 	entries = []RouterEntry{
 		{Path: "/itemWeigh", MustBeMod: false, Method: "POST", Handler: handlers.WeightItem},
-		{Path: "/itemAuth", MustBeMod: true, Method: "POST", Handler: handlers.AuthItem},
+		{Path: "/itemAuthenticate", MustBeMod: true, Method: "POST", Handler: handlers.AuthItem},
 		{Path: "/rankUpdate", MustBeMod: true, Method: "POST", Handler: handlers.UpdateRank},
-		{Path: "/getRank", MustBeMod: true, Method: "POST", Handler: handlers.GetRank},
+		{Path: "/getRank", MustBeMod: false, Method: "POST", Handler: handlers.GetRank},
+		{Path: "/createCriteria", MustBeMod: true, Method: "POST", Handler: handlers.CreateCriteria},
+		{Path: "/deleteCriteria", MustBeMod: true, Method: "POST", Handler: handlers.DeleteCriteria},
+		{Path: "/getCriteria", MustBeMod: false, Method: "POST", Handler: handlers.FindCriteria},
+		{Path: "/getCriteriaByName", MustBeMod: false, Method: "POST", Handler: handlers.FindCriteria},
+		{Path: "/updateCriteria", MustBeMod: true, Method: "POST", Handler: handlers.UpdateCriteria},
 	}
 )
 
@@ -50,9 +55,9 @@ func Build() *gin.Engine {
 		switch entry.Method {
 		case "POST":
 			if entry.MustBeMod {
-				post(engine, entry.Path, Authorize(entry.Handler))
+				post(engine, entry.Path, middleware.RateLimit(middleware.NewRateLimiter(), config.MainConfig.Private.Tokens.RLWhitelist, Authorize(entry.Handler)))
 			} else {
-				post(engine, entry.Path, Authorize(entry.Handler))
+				post(engine, entry.Path, middleware.RateLimit(middleware.NewRateLimiter(), config.MainConfig.Private.Tokens.RLWhitelist, Authorize(entry.Handler)))
 			}
 		}
 	}

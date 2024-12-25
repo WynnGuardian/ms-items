@@ -17,4 +17,4 @@ SELECT DISTINCT ItemName FROM WG_AuthenticatedItems;
 SELECT * FROM WG_AuthenticatedItems WHERE ItemName = ?;
 
 -- name: RankAuthenticatedItems :many
-SELECT * FROM WG_AuthenticatedItems WHERE ItemName = ? ORDER BY Weight LIMIT ? OFFSET ?;
+SELECT * FROM WG_AuthenticatedItems WHERE ItemName = ? ORDER BY Weight DESC LIMIT ? OFFSET ?;

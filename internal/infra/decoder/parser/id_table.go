@@ -7,10 +7,12 @@ import (
 	"os"
 )
 
-var IdTable map[int]string
+var IdToName map[int]string
+var NameToId map[string]int
 
 func LoadIdTable() {
-	IdTable = make(map[int]string, 0)
+	IdToName = make(map[int]string, 0)
+	NameToId = make(map[string]int, 0)
 	file, err := os.Open("id_table.json")
 	if err != nil {
 		log.Fatal(err)
@@ -27,8 +29,9 @@ func LoadIdTable() {
 		log.Fatal(err)
 	}
 
+	NameToId = d
 	for name, id := range d {
-		IdTable[id] = name
+		IdToName[id] = name
 	}
 
 }
