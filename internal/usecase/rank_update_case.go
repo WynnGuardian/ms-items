@@ -65,7 +65,20 @@ func (u *RankUpdateCase) Execute(ctx context.Context, in RankUpdateCaseInput) re
 			item.LastRanked = time.Now()
 			item.Weight = weight * 100
 			if err := authenticatedRepo.Update(ctx, item); err != nil {
-				fmt.Printf("Error while updante item with tracking code %s\n: %s", item.TrackingCode, err.Error())
+				fmt.Printf("Error while update item with tracking code %s\n: %s", item.TrackingCode, err.Error())
+				return response.ErrInternalServerErr(err)
+			}
+		}
+
+		items, err = authenticatedRepo.GetRank(ctx, in.ItemName, 1, 5000)
+		if err != nil {
+			return response.ErrInternalServerErr(err)
+		}
+
+		for i, item := range items {
+			item.Position = i + 1
+			if err := authenticatedRepo.Update(ctx, item); err != nil {
+				fmt.Printf("Error while update item position with tracking code %s\n: %s", item.TrackingCode, err.Error())
 				return response.ErrInternalServerErr(err)
 			}
 		}

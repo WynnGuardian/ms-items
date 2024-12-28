@@ -11,6 +11,8 @@ type RepositoryInterface interface {
 
 type AuthenticatedItemRepositoryInterface interface {
 	FindAllWithItem(ctx context.Context, name string) ([]*entity.AuthenticatedItem, error)
+	Find(ctx context.Context, code string) (*entity.AuthenticatedItem, error)
+	FindWithBytes(ctx context.Context, bytes string) (*entity.AuthenticatedItem, error)
 	Update(ctx context.Context, item *entity.AuthenticatedItem) error
 	Create(ctx context.Context, item *entity.AuthenticatedItem) error
 	GetRank(ctx context.Context, itemName string, page, limit int) ([]*entity.AuthenticatedItem, error)

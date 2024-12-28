@@ -45,6 +45,7 @@ func (r *AuthenticatedItemRepository) Find(ctx context.Context, id string) (*ent
 
 	return &entity.AuthenticatedItem{
 		Id:           i.ID,
+		Position:     int(i.Position),
 		Item:         i.Itemname,
 		OwnerMC:      i.Ownermcuuid,
 		OwnerDC:      i.Owneruserid,
@@ -82,6 +83,7 @@ func (r *AuthenticatedItemRepository) FindAllWithItem(ctx context.Context, name 
 			OwnerDC:      t.Owneruserid,
 			Stats:        statsMap,
 			Weight:       t.Weight,
+			Position:     int(t.Position),
 			LastRanked:   t.Lastranked,
 			PublicOwner:  t.Ownerpublic != 0,
 			TrackingCode: t.Trackingcode,
@@ -103,6 +105,7 @@ func (r *AuthenticatedItemRepository) Create(ctx context.Context, item *entity.A
 		Itemname:     item.Item,
 		Ownermcuuid:  item.OwnerMC,
 		Owneruserid:  item.OwnerDC,
+		Position:     int32(item.Position),
 		Trackingcode: item.TrackingCode,
 		Ownerpublic:  int32(p),
 		Weight:       item.Weight,
@@ -126,6 +129,7 @@ func (r *AuthenticatedItemRepository) Update(ctx context.Context, item *entity.A
 		Ownerpublic:  int32(p),
 		Weight:       item.Weight,
 		Bytes:        item.Bytes,
+		Position:     int32(item.Position),
 	})
 }
 
@@ -133,7 +137,7 @@ func (r *AuthenticatedItemRepository) GetRank(ctx context.Context, itemName stri
 	i, err := r.Queries.RankAuthenticatedItems(ctx, db.RankAuthenticatedItemsParams{
 		Itemname: itemName,
 		Limit:    int32(limit),
-		Offset:   int32(page - 1),
+		Offset:   int32(page-1) * int32(limit),
 	})
 
 	if err != nil {
@@ -157,6 +161,7 @@ func (r *AuthenticatedItemRepository) GetRank(ctx context.Context, itemName stri
 			OwnerMC:      i.Ownermcuuid,
 			OwnerDC:      i.Owneruserid,
 			Stats:        statsMap,
+			Position:     int(i.Position),
 			Weight:       i.Weight,
 			LastRanked:   i.Lastranked,
 			PublicOwner:  int(i.Ownerpublic) != 0,
@@ -164,4 +169,25 @@ func (r *AuthenticatedItemRepository) GetRank(ctx context.Context, itemName stri
 			Bytes:        i.Bytes,
 		}
 	}).ToSlice(), nil
+}
+
+func (r *AuthenticatedItemRepository) FindWithBytes(ctx context.Context, bytes string) (*entity.AuthenticatedItem, error) {
+	v, err := r.Queries.FindWithBytes(ctx, bytes)
+	if err != nil {
+		return nil, err
+	}
+
+	return &entity.AuthenticatedItem{
+		Id:           v.ID,
+		Item:         v.Itemname,
+		Weight:       v.Weight,
+		Position:     int(v.Position),
+		OwnerMC:      v.Ownermcuuid,
+		OwnerDC:      v.Owneruserid,
+		Stats:        nil,
+		LastRanked:   v.Lastranked,
+		PublicOwner:  v.Ownerpublic == 1,
+		TrackingCode: v.Trackingcode,
+		Bytes:        v.Bytes,
+	}, nil
 }

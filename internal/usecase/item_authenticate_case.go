@@ -21,6 +21,7 @@ type AuthenticateItemCaseInput struct {
 	MCOwnerUID string `json:"owner_mc_uid"`
 	DCOwnerUID string `json:"owner_dc_uid"`
 	Public     bool   `json:"public_info"`
+	Force      bool   `json:"force"`
 }
 
 type AuthenticateItemCaseOutput struct {
@@ -51,25 +52,33 @@ func (u *AuthenticateItemCase) Execute(ctx context.Context, in AuthenticateItemC
 		tCode := utils.GenAuthId()
 		id := util.GenNanoId(24)
 
-		decoded, err := decoder.NewItemDecoder(in.ItemUTF16).Decode()
+		d := decoder.NewItemDecoder(in.ItemUTF16)
+
+		var bytes string
+		for _, num := range d.Reader.Data {
+			bytes += fmt.Sprintf("%d", num)
+		}
+
+		_, err := authRepo.FindWithBytes(ctx, bytes)
+		if err == nil && !in.Force {
+			return response.New[any](http.StatusBadRequest, "Item with same bytes found. May it be duplicated? Use FORCE = TRUE to force authentication.", nil)
+		}
+
+		decoded, err := d.Decode()
+
 		if err != nil {
 			return response.ErrInvalidItem
 		}
-
-		fmt.Println(1)
 
 		expected, err := wItemRepo.Find(ctx, decoded.Name)
 		if err != nil {
 			return response.ErrWynnItemNotFound
 		}
 
-		fmt.Println(2)
-
 		criteria, err := criteriaRepo.Find(ctx, decoded.Name)
 		if err != nil {
 			return response.ErrCriteriaNotFound
 		}
-		fmt.Println(3)
 
 		item, err := parser.ParseDecodedItem(ctx, decoded, expected)
 		if err != nil {
@@ -84,6 +93,8 @@ func (u *AuthenticateItemCase) Execute(ctx context.Context, in AuthenticateItemC
 
 		i := &entity.AuthenticatedItem{
 			Id:           id,
+			Bytes:        bytes,
+			Position:     9999,
 			Item:         expected.Name,
 			OwnerMC:      in.MCOwnerUID,
 			OwnerDC:      in.DCOwnerUID,

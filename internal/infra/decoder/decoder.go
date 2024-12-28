@@ -34,12 +34,12 @@ type DecodedItem struct {
 }
 
 type ItemDecoder struct {
-	reader *IntReader
+	Reader *IntReader
 }
 
 func NewItemDecoder(utf16 string) *ItemDecoder {
 	return &ItemDecoder{
-		reader: &IntReader{Data: FromUtf16String(utf16).Bytes, Index: 0},
+		Reader: &IntReader{Data: FromUtf16String(utf16).Bytes, Index: 0},
 	}
 }
 
@@ -47,7 +47,7 @@ func (d *ItemDecoder) Decode() (*DecodedItem, error) {
 
 	decoded := &DecodedItem{}
 
-	if d.reader.read() != 0 {
+	if d.Reader.read() != 0 {
 		return nil, errors.New("invalid item")
 	}
 
@@ -78,7 +78,7 @@ func (d *ItemDecoder) Decode() (*DecodedItem, error) {
 }
 
 func (d *ItemDecoder) versionBlock() (int, error) {
-	version := d.reader.read()
+	version := d.Reader.read()
 	if version == -1 || version != 0 {
 		return 0, fmt.Errorf("unsuported encoding version: %d", version)
 	}
@@ -86,8 +86,8 @@ func (d *ItemDecoder) versionBlock() (int, error) {
 }
 
 func (d *ItemDecoder) itemTypeBlock() error {
-	_ = d.reader.read() // 0 header
-	t := d.reader.read()
+	_ = d.Reader.read() // 0 header
+	t := d.Reader.read()
 	if t == -1 {
 		return errors.New("invalid item")
 	}
@@ -98,34 +98,34 @@ func (d *ItemDecoder) itemTypeBlock() error {
 }
 
 func (d *ItemDecoder) nameBlock() (string, error) {
-	_ = d.reader.read() // 0 header
+	_ = d.Reader.read() // 0 header
 	bytes := make([]byte, 0)
-	for d.reader.peek() != 0 {
-		bytes = append(bytes, byte(d.reader.read()))
+	for d.Reader.peek() != 0 {
+		bytes = append(bytes, byte(d.Reader.read()))
 	}
 	return string(bytes), nil
 }
 
 func (d *ItemDecoder) identificationBlock() (map[int]int, error) {
 	ids := make(map[int]int, 0)
-	_, _ = d.reader.read(), d.reader.read() // read the 0 start block id and header
-	length := d.reader.read()
+	_, _ = d.Reader.read(), d.Reader.read() // read the 0 start block id and header
+	length := d.Reader.read()
 	if length >= 255 {
 		return nil, fmt.Errorf("yoo many identifications: %d", length)
 	}
-	extended := d.reader.read() == 1
+	extended := d.Reader.read() == 1
 	preIdedCount := int(0)
 	if extended {
-		preIdedCount = d.reader.read()
+		preIdedCount = d.Reader.read()
 	}
 	for i := 0; i < int(preIdedCount)+int(length); i++ {
-		id := d.reader.read()
+		id := d.Reader.read()
 		if i < int(preIdedCount) {
-			_ = d.reader.DecodeFirstVSI()
+			_ = d.Reader.DecodeFirstVSI()
 			continue
 		}
-		base := d.reader.DecodeFirstVSI()
-		roll := d.reader.read()
+		base := d.Reader.DecodeFirstVSI()
+		roll := d.Reader.read()
 		ids[id] = int(math.Floor((float64(base)*(float64(roll)/100) + 0.5)))
 		if (id >= 0 && id <= 3) || (id >= 37 && id <= 40) { // reverse costs
 			ids[id] = -ids[id]
