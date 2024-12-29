@@ -43,6 +43,21 @@ func (q *Queries) CreateAuthenticatedItem(ctx context.Context, arg CreateAuthent
 	return err
 }
 
+const createAuthenticatedItemStat = `-- name: CreateAuthenticatedItemStat :exec
+INSERT INTO WG_AuthenticatedItemStats (ItemId, StatId, Value) VALUES (?,?,?)
+`
+
+type CreateAuthenticatedItemStatParams struct {
+	Itemid string `json:"itemid"`
+	Statid string `json:"statid"`
+	Value  int32  `json:"value"`
+}
+
+func (q *Queries) CreateAuthenticatedItemStat(ctx context.Context, arg CreateAuthenticatedItemStatParams) error {
+	_, err := q.db.ExecContext(ctx, createAuthenticatedItemStat, arg.Itemid, arg.Statid, arg.Value)
+	return err
+}
+
 const findAllAuthenticatedItemNames = `-- name: FindAllAuthenticatedItemNames :many
 SELECT DISTINCT ItemName FROM WG_AuthenticatedItems
 `

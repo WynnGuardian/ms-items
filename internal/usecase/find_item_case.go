@@ -2,6 +2,7 @@ package usecase
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 
 	"github.com/wynnguardian/common/response"
@@ -33,6 +34,8 @@ func (u *FindItemCase) Execute(ctx context.Context, in FindItemCaseInput) respon
 		if err != nil {
 			return util.NotFoundOrInternalErr(err, response.ErrSurveyNotFound)
 		}
+
+		fmt.Println(cr)
 
 		return response.New(http.StatusOK, "", cr)
 	})

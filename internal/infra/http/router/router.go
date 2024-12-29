@@ -29,6 +29,7 @@ var (
 		{Path: "/getCriteria", MustBeMod: false, Method: "POST", Handler: handlers.FindCriteria},
 		{Path: "/getCriteriaByName", MustBeMod: false, Method: "POST", Handler: handlers.FindCriteria},
 		{Path: "/updateCriteria", MustBeMod: true, Method: "POST", Handler: handlers.UpdateCriteria},
+		{Path: "/findItem", MustBeMod: true, Method: "POST", Handler: handlers.FindItem},
 	}
 )
 

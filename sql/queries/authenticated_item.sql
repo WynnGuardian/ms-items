@@ -21,3 +21,6 @@ SELECT * FROM WG_AuthenticatedItems WHERE ItemName = ? ORDER BY Position ASC LIM
 
 -- name: FindWithBytes :one
 SELECT * FROM WG_AuthenticatedItems WHERE Bytes = ? LIMIT 1;
+
+-- name: CreateAuthenticatedItemStat :exec
+INSERT INTO WG_AuthenticatedItemStats (ItemId, StatId, Value) VALUES (?,?,?);

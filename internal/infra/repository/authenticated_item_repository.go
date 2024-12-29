@@ -3,9 +3,11 @@ package repository
 import (
 	"context"
 	"database/sql"
+	"fmt"
 
 	"github.com/victorbetoni/go-streams/streams"
 	"github.com/wynnguardian/common/entity"
+	"github.com/wynnguardian/common/uow"
 	"github.com/wynnguardian/ms-items/internal/infra/db"
 )
 
@@ -31,7 +33,7 @@ func (r *AuthenticatedItemRepository) Find(ctx context.Context, id string) (*ent
 	}
 
 	stats, err := r.Queries.FindAuthenticatedItemStats(ctx, db.FindAuthenticatedItemStatsParams{
-		Code: id,
+		Code: i.ID,
 	})
 
 	if err != nil {
@@ -43,8 +45,14 @@ func (r *AuthenticatedItemRepository) Find(ctx context.Context, id string) (*ent
 		st[s.Statid] = int(s.Value)
 	}
 
+	w, err := GetWynnItemRepository(ctx, uow.Current()).Find(ctx, i.Itemname)
+	if err != nil {
+		return nil, err
+	}
+
 	return &entity.AuthenticatedItem{
 		Id:           i.ID,
+		WynnItem:     w,
 		Position:     int(i.Position),
 		Item:         i.Itemname,
 		OwnerMC:      i.Ownermcuuid,
@@ -99,7 +107,7 @@ func (r *AuthenticatedItemRepository) Create(ctx context.Context, item *entity.A
 		p = 0
 	}
 
-	return r.Queries.CreateAuthenticatedItem(ctx, db.CreateAuthenticatedItemParams{
+	err := r.Queries.CreateAuthenticatedItem(ctx, db.CreateAuthenticatedItemParams{
 		ID:           item.Id,
 		Lastranked:   item.LastRanked,
 		Itemname:     item.Item,
@@ -111,6 +119,22 @@ func (r *AuthenticatedItemRepository) Create(ctx context.Context, item *entity.A
 		Weight:       item.Weight,
 		Bytes:        item.Bytes,
 	})
+
+	if err != nil {
+		return err
+	}
+
+	for st, v := range item.Stats {
+		if err := r.Queries.CreateAuthenticatedItemStat(ctx, db.CreateAuthenticatedItemStatParams{
+			Itemid: item.Id,
+			Statid: st,
+			Value:  int32(v),
+		}); err != nil {
+			return err
+		}
+	}
+
+	return nil
 }
 
 func (r *AuthenticatedItemRepository) Update(ctx context.Context, item *entity.AuthenticatedItem) error {
@@ -140,6 +164,8 @@ func (r *AuthenticatedItemRepository) GetRank(ctx context.Context, itemName stri
 		Offset:   int32(page-1) * int32(limit),
 	})
 
+	wRepo := GetWynnItemRepository(ctx, uow.Current())
+
 	if err != nil {
 		return nil, err
 	}
@@ -155,7 +181,7 @@ func (r *AuthenticatedItemRepository) GetRank(ctx context.Context, itemName stri
 			}
 		}
 
-		return &entity.AuthenticatedItem{
+		it := &entity.AuthenticatedItem{
 			Id:           i.ID,
 			Item:         i.Itemname,
 			OwnerMC:      i.Ownermcuuid,
@@ -168,6 +194,14 @@ func (r *AuthenticatedItemRepository) GetRank(ctx context.Context, itemName stri
 			TrackingCode: i.Trackingcode,
 			Bytes:        i.Bytes,
 		}
+
+		wItem, err := wRepo.Find(ctx, i.Itemname)
+		if err != nil {
+			fmt.Println(err.Error())
+			return it
+		}
+		it.WynnItem = wItem
+		return it
 	}).ToSlice(), nil
 }
 
@@ -177,8 +211,13 @@ func (r *AuthenticatedItemRepository) FindWithBytes(ctx context.Context, bytes s
 		return nil, err
 	}
 
+	w, err := GetWynnItemRepository(ctx, uow.Current()).Find(ctx, v.Itemname)
+	if err != nil {
+		return nil, err
+	}
 	return &entity.AuthenticatedItem{
 		Id:           v.ID,
+		WynnItem:     w,
 		Item:         v.Itemname,
 		Weight:       v.Weight,
 		Position:     int(v.Position),

@@ -70,3 +70,11 @@ func UpdateCriteria(ctx *gin.Context) response.WGResponse {
 	}
 	return usecase.NewCriteriaUpdateCase(uow.Current()).Execute(ctx, input)
 }
+
+func FindItem(ctx *gin.Context) response.WGResponse {
+	input := usecase.FindItemCaseInput{}
+	if err := ctx.BindJSON(&input); err != nil {
+		return response.ErrBadRequest
+	}
+	return usecase.NewFindItemCase(uow.Current()).Execute(ctx, input)
+}
