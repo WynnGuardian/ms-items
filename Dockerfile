@@ -1,7 +1,7 @@
 FROM golang:1.23.1
 
 WORKDIR /go/src
-COPY ./backend /go/src
+COPY . /go/src
 
 ENV NODE_VERSION=16.13.0
 RUN apt install -y curl

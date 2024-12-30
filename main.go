@@ -8,6 +8,7 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 
+	"github.com/wynnguardian/common/response"
 	u "github.com/wynnguardian/common/uow"
 	"github.com/wynnguardian/common/utils"
 	"github.com/wynnguardian/ms-items/internal/domain/config"
@@ -36,14 +37,14 @@ func main() {
 
 	registerRepositories(uo)
 
-	/*uo.Do(ctx, func(u *u.Uow) response.WGResponse {
+	uo.Do(ctx, func(u *u.Uow) response.WGResponse {
 		repo := repository.GetGenRepository(ctx, uo)
 		repo.GenDefaultScales(ctx)
 		repo.GenItemDB(ctx)
 		return response.WGResponse{
 			Status: 200,
 		}
-	})*/
+	})
 
 	defer db.Close()
 
